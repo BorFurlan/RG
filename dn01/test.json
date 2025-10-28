@@ -1,0 +1,198 @@
+{
+    "models": [
+        [
+            [[-1, -1], [1, -1]],
+            [[1, -1], [0, 1]],
+            [[0, 1], [-1, -1]]
+        ],
+        [
+            [[0, 1], [-0.5878, -0.8090]],
+            [[-0.5878, -0.8090], [0.9511, 0.3090]],
+            [[0.9511, 0.3090], [-0.9511, 0.3090]],
+            [[-0.9511, 0.3090], [0.5878, -0.8090]],
+            [[0.5878, -0.8090], [0, 1]]
+        ]
+    ],
+    "scene": [
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.01, 0.01] },
+                { "type": "rotate", "angle": 1 },
+                { "type": "translate", "vector": [0.05, 0] },
+                { "type": "rotate", "angle": 0.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.02, 0.02] },
+                { "type": "rotate", "angle": 2 },
+                { "type": "translate", "vector": [0.1, 0] },
+                { "type": "rotate", "angle": 1 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.03, 0.03] },
+                { "type": "rotate", "angle": 3 },
+                { "type": "translate", "vector": [0.15, 0] },
+                { "type": "rotate", "angle": 1.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.04, 0.04] },
+                { "type": "rotate", "angle": 4 },
+                { "type": "translate", "vector": [0.2, 0] },
+                { "type": "rotate", "angle": 2 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.05, 0.05] },
+                { "type": "rotate", "angle": 5 },
+                { "type": "translate", "vector": [0.25, 0] },
+                { "type": "rotate", "angle": 2.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.06, 0.06] },
+                { "type": "rotate", "angle": 6 },
+                { "type": "translate", "vector": [0.3, 0] },
+                { "type": "rotate", "angle": 3 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.07, 0.07] },
+                { "type": "rotate", "angle": 7 },
+                { "type": "translate", "vector": [0.35, 0] },
+                { "type": "rotate", "angle": 3.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.08, 0.08] },
+                { "type": "rotate", "angle": 8 },
+                { "type": "translate", "vector": [0.4, 0] },
+                { "type": "rotate", "angle": 4 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.09, 0.09] },
+                { "type": "rotate", "angle": 9 },
+                { "type": "translate", "vector": [0.45, 0] },
+                { "type": "rotate", "angle": 4.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.1, 0.1] },
+                { "type": "rotate", "angle": 10 },
+                { "type": "translate", "vector": [0.5, 0] },
+                { "type": "rotate", "angle": 5 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.11, 0.11] },
+                { "type": "rotate", "angle": 11 },
+                { "type": "translate", "vector": [0.55, 0] },
+                { "type": "rotate", "angle": 5.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.12, 0.12] },
+                { "type": "rotate", "angle": 12 },
+                { "type": "translate", "vector": [0.6, 0] },
+                { "type": "rotate", "angle": 6 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.13, 0.13] },
+                { "type": "rotate", "angle": 13 },
+                { "type": "translate", "vector": [0.65, 0] },
+                { "type": "rotate", "angle": 6.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.14, 0.14] },
+                { "type": "rotate", "angle": 14 },
+                { "type": "translate", "vector": [0.7, 0] },
+                { "type": "rotate", "angle": 7 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.15, 0.15] },
+                { "type": "rotate", "angle": 15 },
+                { "type": "translate", "vector": [0.75, 0] },
+                { "type": "rotate", "angle": 7.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.16, 0.16] },
+                { "type": "rotate", "angle": 16 },
+                { "type": "translate", "vector": [0.8, 0] },
+                { "type": "rotate", "angle": 8 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.17, 0.17] },
+                { "type": "rotate", "angle": 17 },
+                { "type": "translate", "vector": [0.85, 0] },
+                { "type": "rotate", "angle": 8.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.18, 0.18] },
+                { "type": "rotate", "angle": 18 },
+                { "type": "translate", "vector": [0.9, 0] },
+                { "type": "rotate", "angle": 9 }
+            ]
+        },
+        {
+            "model": 0,
+            "transforms": [
+                { "type": "scale", "factor": [0.19, 0.19] },
+                { "type": "rotate", "angle": 19 },
+                { "type": "translate", "vector": [0.95, 0] },
+                { "type": "rotate", "angle": 9.5 }
+            ]
+        },
+        {
+            "model": 1,
+            "transforms": [
+                { "type": "scale", "factor": [0.2, 0.2] },
+                { "type": "rotate", "angle": 20 },
+                { "type": "translate", "vector": [1, 0] },
+                { "type": "rotate", "angle": 10 }
+            ]
+        }
+    ]
+}
