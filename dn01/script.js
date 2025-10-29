@@ -5,6 +5,15 @@ let preview;
 let data;   // json modelov in scen
 let files = [];
 
+const tmp = 
+[
+    [1,  2,  3],
+    [2,  3,  4],
+    [3,  4,  5]
+];
+
+const tmp1d = [1,  2,  3];
+
 dropbox = document.getElementById("drop-zone");
 dropbox.addEventListener("dragenter", dragenter);
 dropbox.addEventListener("dragover", dragover);
@@ -22,7 +31,6 @@ function clearItems(e)
 {
     preview.textContent = "";
     files = [];
-    console.log(files);
 }
 
 function dragenter(e) 
@@ -52,16 +60,12 @@ function drop(e)
     files = dt.files;
 
     handleFiles(files);
-
-    console.log(files);
 }
 
 // Shrani json iz datoteke in izpise ime nalozene datoteke
 function handleFiles(files) 
 {
     let file = files[0];
-
-    console.log(file.name.split("."));
 
     if (file.name.split(".")[1] != "json")
     {
@@ -80,7 +84,8 @@ function handleFiles(files)
             data = JSON.parse(reader.result);
             console.log(data)
 
-            drawModel(data.models);
+            // JSON se je naložil, lahko začnemo z izrisom
+            drawScene(data);
         }
 
     preview.appendChild(listItem); // Assuming that "preview" is the div output where the content will be displayed.
@@ -94,40 +99,47 @@ const deviceMatrix =
     [0,        0,          1   ]
 ]
 
-const tmp = 
-[
-    [1,  2,  3],
-    [2,  3,  4],
-    [3,  4,  5]
-];
-
-const tmp1d = [1,  2,  3];
-
 function drawLine([x0, y0], [x1, y1])
 {
-    // TODO matrika zaslonske preslikave
-    // [-1, 1] -> [0, 512]
+    let d1 = multiplyMatrices(deviceMatrix, [x0, y0, 1]);
+    let d2 = multiplyMatrices(deviceMatrix, [x1, y1, 1]);
 
-    multiplyMatrices(tmp, tmp1d);
+    let d1X = d1[0];
+    let d1Y = d1[1];
+
+    let d2X = d2[0];
+    let d2Y = d2[1];
 
     ctx.beginPath();
-    ctx.moveTo(x0, y0);
-    ctx.lineTo(x1, y1);
+    ctx.moveTo(d1X, d1Y);
+    ctx.lineTo(d2X, d2Y);
+    //ctx.rect(d1X, d1Y, 1, 1);
+    //ctx.rect(d2X, d2Y, 1, 1);
     ctx.stroke();
+
+    console.log([d1X, d1Y], [d2X, d2Y]);
 }
 
-function drawModel(model)
+// Draws a model with applied transformations
+function drawModel(model, transformations)
 {
+
+    const transformMatrix = chainMultiplyMatrices(transformations[0], transformations.slice(1));
+    let p1, p2;
+    let d1, d2;
     for (let i = 0; i < model.length; i++)
     {
-        for (let j = 0; j < model[0].length; j++)
-        {
-            //console.log(model[i][j])
-            drawLine(model[i][j][0], model[i][j][1]);
-        }
+        p1 = model[i][0];
+        p2 = model[i][1];
+
+        d1 = multiplyMatrices(transformMatrix, [p1[0], p1[1], 1]);
+        d2 = multiplyMatrices(transformMatrix, [p2[0], p2[1], 1]);
+
+        drawLine([d1[0], d1[1]], [d2[0], d2[1]]);
     }
 }
 
+// Multiplies two given matrices
 function multiplyMatrices(a, b)
 {
     if (a[0].length != b.length)
@@ -137,35 +149,136 @@ function multiplyMatrices(a, b)
     }
 
     c = [];
+    let aik, bkj;
 
+    // Preverimo, ali je matrika b 1D
+    // Rabimo vedeti pri množenju in shranjevanju v novo matriko
+    let isB1D = b[0].length === undefined;
+
+    // Pripravimo končno matriko
     for (let i = 0; i < a.length; i++)
     {
-        c.push([]);
+        if (b[0].length === undefined)
+        {
+            c.push(0);
+        } else 
+        {
+            c.push([]);
+        }
     }
 
     for (let i = 0; i < a.length; i++)
     {
-        for (let j = 0; j < b.length; j++)
+        for (let j = 0; j < (isB1D ? 0 : b[0].length); j++)
         {
             c[i].push(0);
         }
     }
 
-    for (let i = 0; i < a[0].length; i++)
+    // Množenje matrik a in b
+    for (let i = 0; i < a.length; i++)
     {
-        for (let j = 0; j < b.length; j++)
+        for (let j = 0; j < (isB1D ? 1 : b[0].length); j++)
         {
-            for (let k = 0; k < (b[0].length === undefined ? 1 : b[0].length); k++)
+            for (let k = 0; k < a[0].length; k++)
             {
-                let aij = a[i][k];
-                let bji = b[k][j];
-                let mul = aij * bji;
-                let fin = c[i][j] + mul;
-                c[i][j] = c[i][j] + (a[i][k] * b[k][j]);
+                aik = a[i][k];
+                bkj = (isB1D ? b[k] : b[k][j]);
+
+                if (isB1D)
+                {
+                    c[i] = c[i] + (aik * bkj);    
+                }
+                else
+                {
+                    c[i][j] = c[i][j] + (aik * bkj);
+                }
             }
         }
     }
 
-    console.log("c");
-    console.log(c);
+    return c;
+}
+
+function scaleMatrix(factor)
+{
+    let factorX = factor[0];
+    let factorY = factor[1];
+
+    let scaleMatrix = 
+    [
+        [factorX,    0,         0],
+        [0,          factorY,   0],
+        [0,          0,         1]
+    ];
+
+    return scaleMatrix;
+}
+
+function translateMatrix(translate)
+{
+    let translateX = translate[0];
+    let translateY = translate[1];
+
+    let translateMatrix = 
+    [
+        [1,     0,      translateX],
+        [0,     1,      translateY],
+        [0,     0,      1         ]
+    ];
+
+    return translateMatrix;
+}
+
+function rotationMatrix(angle)
+{
+    let rotationMatrix = 
+    [
+        [Math.cos(angle),       -Math.sin(angle),       0],
+        [Math.sin(angle),       Math.cos(angle),        0],
+        [0,                     0,                      1]
+    ];
+
+    return rotationMatrix;
+}
+
+function drawScene(data)
+{
+    for (let i = 0; i < data.scene.length; i++)
+    {
+
+        let currentScene = data.scene[i];
+        let transformations = [];
+
+        // Gather all transformations for the current model
+        for (let j = 0; j < currentScene.transforms.length; j++)
+        {
+            let currentTransform = currentScene.transforms[j];
+            switch (currentTransform.type)
+            {
+                case "scale":
+                    transformations.push(scaleMatrix(currentTransform.factor));
+                    break;
+                case "translate":
+                    transformations.push(translateMatrix(currentTransform.vector));
+                    break;
+                case "rotate":
+                    transformations.push(rotationMatrix(currentTransform.angle));
+                    break;
+            }
+        }
+
+        drawModel(data.models[currentScene.model], transformations);
+    }
+}
+
+function chainMultiplyMatrices(matrix, chain)
+{
+    if (chain.length == 1)
+    {
+        let tmp = multiplyMatrices(chain[0], matrix)
+        return multiplyMatrices(chain[0], matrix);
+    }
+
+    return chainMultiplyMatrices(multiplyMatrices(chain[0], matrix), chain.slice(1));
 }
