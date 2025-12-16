@@ -1,0 +1,43 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>RG-dn02</title>
+        <!-- Vključimo css datoteko s stili -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div class="main">
+            <h1>RG:dn02</h1>
+            <div class="flex-container">
+                <div>
+                    <h2>Nalozi datoteko</h2>
+                    <label id="drop-zone" style="display:block">
+                        Spusti json datoteko za izris.
+                        <input type="file" id="file-input" multiple accept=".json"/>
+                        <ul id="preview"></ul>
+                    </label>
+                    <div style="display: flex; justify-content: left; margin: 10px 0px;">
+                        <input id="clear-btn" type="button" value="Pobrisi" />
+                    </div>
+                    
+                </div>
+                <div class="flex-container-col">
+                    <h2>Izris Bezierovih krivulj</h2>
+                    <canvas id="myCanvas" width="512" height="512"></canvas> 
+                    <div class="flex-container-buttons" style="margin: 10px 0px;">
+                        <input id="gumbC0" type="button" value="Zveznost C0 (vse krivulje)" />
+                        <input id="gumbC1" type="button" value="Zveznost C1 (vse krivulje)"/>
+                    </div>
+                    <div class="flex-container-buttons" style="margin: 10px 0px;">
+                        <input id="gumbC0Zlepki" type="button" value="Zveznost C0 (vsi zlepki)" />
+                        <input id="gumbC1Zlepki" type="button" value="Zveznost C1 (vsi zlepki)"/>                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- Vključimo javascript za obdelavo spuščenih datotek -->
+         <script src="script.js"></script>
+    </body>
+</html> 

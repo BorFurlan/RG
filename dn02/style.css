@@ -1,0 +1,88 @@
+body 
+{
+    font-family: monospace;
+}
+#drop-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    max-width: 100%;
+    height: 200px;
+    padding: 1em;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    color: slategray;
+    cursor: pointer;
+}
+
+#file-input {
+    display: none;
+}
+
+#preview {
+    width: 500px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    list-style: none;
+    padding: 0;
+}
+
+#preview li {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: 0;
+    width: 100%;
+}
+
+#preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+canvas 
+{
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+.main
+{
+    text-align: center;
+}
+.flex-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flex-container-col
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.flex-container div
+{
+    margin: 10px;
+}
+
+input[type='button']
+{
+    padding: 5px 10px;
+    background-color: #ff6f00;
+    border-radius: 0.7em;
+    font-family: monospace;
+}
+
+.flex-container-buttons
+{
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+}
